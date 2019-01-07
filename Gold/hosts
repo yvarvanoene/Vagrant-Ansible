@@ -1,0 +1,9 @@
+[webservers]
+web1 ansible_host=127.0.0.1 ansible_port=2222
+web2 ansible_host=127.0.0.1 ansible_port=2200
+
+[database]
+db1 ansible_host=127.0.0.1 ansible_port=2201
+
+[loadbalancer]
+lb1 ansible_host=127.0.0.1 anisble_port=2202

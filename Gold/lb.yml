@@ -1,0 +1,26 @@
+- name: Configure the loadbalancer 
+  hosts: lb1
+  sudo: True
+  tasks:
+     - name: enable ufw
+       service: name=ufw state=started
+
+     - name: allow http traffic
+       ufw: rule=allow port=80 proto=tcp
+
+     - name: install nginx
+       apt: name=nginx update_cache=yes
+   
+     - name: start nginx
+       service: name=nginx state=started
+
+     - name: copy configuration file
+       copy: src=templates/default dest=/etc/nginx/sites-available/default
+
+     - name: enable configuration
+       file: >
+         dest=/etc/nginx/sites-enabled/default 
+         src=/etc/nginx/sites-available/default
+
+     - name: restart nginx
+       service: name=nginx state=restarted

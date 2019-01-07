@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Thank you for choosing our silver program, please wait while your webserver is being brought up and configured by Vagrant and Ansible."
+
+# Brings the virtual machine online and provisions it
+vagrant up
+
+echo "Thank you for your patience, your nginx webserver is now ready for usage"
+
+# Opens the browser to the webpage
+firefox http://localhost:8088

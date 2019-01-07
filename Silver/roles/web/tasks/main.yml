@@ -1,0 +1,20 @@
+---
+- apt: update_cache=yes
+
+# Install the package "mysql"
+- apt: name={{item}} state=present
+  with_items:
+   - nginx
+   - php5-fpm
+   - php5-mysql
+
+- name: Create nginx configuration file
+  template: src=default dest=/etc/nginx/sites-available/default
+  notify: 
+  - restart nginx
+
+- name: Add wall.php script that demonstrates php and mysql functionality
+  template: src=index.php dest=/usr/share/nginx/html/index.php
+
+- name: nginx service state
+  service: name=nginx state=started enabled=yes
